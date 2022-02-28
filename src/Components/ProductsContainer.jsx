@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Loader from "./Loader";
 import ProductItems from "./ProductItems";
 import "./ProductsContainer.scss";
 
@@ -11,7 +12,7 @@ const sortByDate = (data, sortBy) => {
 					new Date(a.date.split("/").reverse().join("/"));
 	});
 };
-const ProductsContainer = ({ data, filter, search }) => {
+const ProductsContainer = ({ data, filter, search, loading }) => {
 	const tableHeader = [
 		"Order ID",
 		"Customer",
@@ -76,19 +77,23 @@ const ProductsContainer = ({ data, filter, search }) => {
 				))}
 			</div>
 			<div className="ProductsContainer__items-container">
-				{productData
-					.filter(
-						(product) =>
-							(filter.length === 0 || product.status === filter) &&
-							(search.length === 0 ||
-								product.customer.toLowerCase().includes(search.toLowerCase()))
-					)
-					.map((product, index) => (
-						<div key={index}>
-							<ProductItems data={product} />
-							<hr />
-						</div>
-					))}
+				{loading ? (
+					<Loader />
+				) : (
+					productData
+						.filter(
+							(product) =>
+								(filter.length === 0 || product.status === filter) &&
+								(search.length === 0 ||
+									product.customer.toLowerCase().includes(search.toLowerCase()))
+						)
+						.map((product, index) => (
+							<div style={{ width: "100%" }} key={index}>
+								<ProductItems data={product} />
+								<hr />
+							</div>
+						))
+				)}
 			</div>
 		</div>
 	);
