@@ -1,0 +1,22 @@
+.ProductsContainer {
+	display: flex;
+	flex-direction: column;
+	.ProductsContainer__Header {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		.Header__title {
+			text-transform: uppercase;
+			display: flex;
+			align-items: center;
+			span {
+				// white-space: nowrap;
+				display: flex;
+				align-items: center;
+				.Header__icon {
+					height: 20px;
+					width: 20px;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+.SearchBar {
+	width: 50%;
+	margin-right: auto;
+	display: flex;
+	align-items: center;
+	.SearchBar__icon,
+	.ClearSearch__icon {
+		position: relative;
+		height: 20px;
+		width: 20px;
+	}
+	.SearchBar__icon {
+		right: 0;
+	}
+	.ClearSearch__icon {
+		left: 0;
+	}
+	.SearchBar__input {
+		position: relative;
+		flex-grow: 1;
+	}
+}
