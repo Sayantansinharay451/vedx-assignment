@@ -1,21 +1,42 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./Dropdown.scss";
 
 const Dropdown = ({ onFilter }) => {
 	const [selected, setSelected] = useState(-1);
+	const [isOpen, setIsOpen] = useState(false);
+
+	const DropdownRef = useRef(null);
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (DropdownRef.current && !DropdownRef.current.contains(event.target)) {
+				setIsOpen(false);
+			}
+		};
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			// Unbind the event listener on clean up
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [DropdownRef]);
+
+	const handelOpenDropdown = () => {
+		setIsOpen(!isOpen);
+	};
+
 	const options = useMemo(() => {
-		return ["Completed", "Delivered", "Prepared"];
+		return ["Completed", "Delivered", "Prepared", "All"];
 	}, []);
 
 	useEffect(() => {
 		if (selected !== -1) {
-			onFilter(options[selected]);
+			onFilter(options[selected] === "All" ? "" : options[selected]);
 		}
 	}, [options, selected, onFilter]);
 
 	return (
 		<div className="Dropdown">
-			<div className="Dropdown__input">
+			<div className="Dropdown__input" onClick={handelOpenDropdown}>
 				<svg
 					className="Dropdown__icon"
 					xmlns="http://www.w3.org/2000/svg"
@@ -32,13 +53,21 @@ const Dropdown = ({ onFilter }) => {
 				</svg>
 				{selected >= 0 ? options[selected] : "Filter"}
 			</div>
-			<div className="Dropdown__input-container">
+			<div
+				ref={DropdownRef}
+				className="Dropdown__input-container"
+				style={{
+					display: isOpen ? "block" : "none",
+				}}
+			>
 				{options.map((option, index) => (
 					<div
 						key={index}
-						onClick={() => {
+						onClick={(event) => {
 							setSelected(index);
+							setIsOpen(false);
 						}}
+						className={`Dropdown__option ${index === selected && "selected"}`}
 					>
 						{option}
 					</div>

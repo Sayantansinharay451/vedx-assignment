@@ -1,22 +1,41 @@
 .ProductsContainer {
+	height: 100%;
+	user-select: none;
+	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	.ProductsContainer__Header {
+		padding: 1rem;
+		border-radius: 5px;
+		background-color: #f3f8f8;
 		display: grid;
-		grid-template-columns: repeat(6, 1fr);
+		gap: 2px;
+		grid-template-columns: repeat(9, 1fr);
+		:nth-child(2),
+		:nth-child(3),
+		:nth-child(4) {
+			grid-column: span 2 / span 2;
+		}
 		.Header__title {
 			text-transform: uppercase;
 			display: flex;
 			align-items: center;
 			span {
-				// white-space: nowrap;
+				cursor: pointer;
+				font-weight: bold;
 				display: flex;
 				align-items: center;
 				.Header__icon {
+					color: #d8dbde;
 					height: 20px;
 					width: 20px;
 				}
 			}
 		}
+	}
+	.ProductsContainer__items-container {
+		flex-direction: column;
+		height: 100%;
+		overflow: auto;
 	}
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import "./App.scss";
 import Dropdown from "./Components/Dropdown";
 import ProductsContainer from "./Components/ProductsContainer";
 import SearchBar from "./Components/SearchBar";

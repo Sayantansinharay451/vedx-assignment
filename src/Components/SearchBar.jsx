@@ -30,6 +30,9 @@ const SearchBar = ({ onSearch }) => {
 				}}
 			/>
 			<svg
+				style={{
+					display: search.length ? "block" : "none",
+				}}
 				className="ClearSearch__icon"
 				onClick={() => {
 					setSearch("");

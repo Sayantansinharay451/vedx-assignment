@@ -75,19 +75,21 @@ const ProductsContainer = ({ data, filter, search }) => {
 					</div>
 				))}
 			</div>
-			{productData
-				.filter(
-					(product) =>
-						(filter.length === 0 || product.status === filter) &&
-						(search.length === 0 ||
-							product.customer.toLowerCase().includes(search.toLowerCase()))
-				)
-				.map((product, index) => (
-					<div key={index} className="ProductsContainer__items">
-						<ProductItems data={product} />
-						<hr />
-					</div>
-				))}
+			<div className="ProductsContainer__items-container">
+				{productData
+					.filter(
+						(product) =>
+							(filter.length === 0 || product.status === filter) &&
+							(search.length === 0 ||
+								product.customer.toLowerCase().includes(search.toLowerCase()))
+					)
+					.map((product, index) => (
+						<div key={index}>
+							<ProductItems data={product} />
+							<hr />
+						</div>
+					))}
+			</div>
 		</div>
 	);
 };

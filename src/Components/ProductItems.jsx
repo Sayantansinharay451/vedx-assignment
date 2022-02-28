@@ -25,7 +25,9 @@ const ProductItems = ({ data }) => {
 				<div>{product_description}</div>
 			</span>
 			<span className="Item__date">{date}</span>
-			<span className={`Item__status Status__${status} `}>{status}</span>
+			<span>
+				<div className={`Item__status Status__${status}`}>{status}</div>
+			</span>
 		</div>
 	);
 };
