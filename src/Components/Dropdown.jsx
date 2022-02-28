@@ -2,7 +2,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./Dropdown.scss";
 
 const Dropdown = ({ onFilter }) => {
-	const [selected, setSelected] = useState(-1);
+	const options = useMemo(() => {
+		return ["Completed", "Delivered", "Prepared", "All"];
+	}, []);
+	const [selected, setSelected] = useState(options.length - 1);
 	const [isOpen, setIsOpen] = useState(false);
 
 	const DropdownRef = useRef(null);
@@ -23,10 +26,6 @@ const Dropdown = ({ onFilter }) => {
 	const handelOpenDropdown = () => {
 		setIsOpen(!isOpen);
 	};
-
-	const options = useMemo(() => {
-		return ["Completed", "Delivered", "Prepared", "All"];
-	}, []);
 
 	useEffect(() => {
 		if (selected !== -1) {
@@ -51,7 +50,7 @@ const Dropdown = ({ onFilter }) => {
 						d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
 					/>
 				</svg>
-				{selected >= 0 ? options[selected] : "Filter"}
+				{options[selected]}
 			</div>
 			<div
 				ref={DropdownRef}
